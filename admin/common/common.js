@@ -17,4 +17,14 @@ router.post('/cate', function (req, res) {
     console.log("cate list");
 });
 
+router.get('/getNowTime', (req, res) => {
+	res.json({
+		message: "success",
+		code: 200,
+		data: {
+			timestamp: new Date().getTime()
+		}
+	});
+})
+
 module.exports = router
