@@ -2,12 +2,13 @@ let express = require("express");
 let app = new express();
 let db = require("./db/db.js");
 let mysql = require("mysql");
+let commonBase = require("./common/base.js")
 
 // Connect
 var conn = mysql.createConnection(db.mysql);
 conn.connect((err) => {
 	if (err) {
-		throw (err);
+		console.log('数据库链接失败')
 	}
 	console.log('MySql Connected...')
 });
@@ -36,10 +37,13 @@ app.get('/getCate', (req, res) => {
 			});
 		}
 		if (result) {
+			let cates = commonBase.base.createResetCate(result, 0);
 			res.json({
 				"result": {
 					message: "success",
-					data: result
+					data: {
+						cates
+					}
 				}
 			});
 		}
